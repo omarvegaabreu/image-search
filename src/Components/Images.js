@@ -1,9 +1,8 @@
 import React from "react";
+import { Image } from "semantic-ui-react";
 
-class Images extends React.Component {
-  render() {
-    return <div>{process.env.REACT_APP_KEY}</div>;
-  }
-}
+const Images = (props) => {
+  return <div>{this.props.image}</div>;
+};
 
 export default Images;

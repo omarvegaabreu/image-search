@@ -1,29 +1,40 @@
 import React from "react";
 import axios from "axios";
+import { Image } from "semantic-ui-react";
+import { API_KEY, API_URL } from "../util/apikeys";
 import SearchBar from "./SearchBar";
 import Images from "./Images";
-import { API_KEY, API_URL } from "../util/apikeys";
 
 class App extends React.Component {
   state = {
-    images: "",
+    images: [],
   };
 
-  async onSearchSubmit(term) {
+  onSearchSubmit = async (term) => {
     const response = await axios.get(API_URL(), {
       params: { query: term },
       headers: {
         Authorization: `Client-ID ${API_KEY()}`,
       },
     });
-    console.log(response.data.results);
-  }
+
+    const responseData = [
+      ...response.data.results.map((res) => res.urls.small),
+    ];
+
+    this.setState({ images: responseData });
+  };
+
   render() {
     return (
       <div className="ui container">
-        <div>{`images: ${this.state.images}`}</div>
         <SearchBar onSubmit={this.onSearchSubmit} />
         <Images />
+        {this.state.images.map((path) => (
+          <div className="ui stackable three column grid" key={path}>
+            <Image src={path} alt="alt" size="medium" bordered />
+          </div>
+        ))}
       </div>
     );
   }
