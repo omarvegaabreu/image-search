@@ -6,7 +6,11 @@ import App from "./Components/App";
 // console.log();
 
 const Application = () => {
-  return <App />;
+  return (
+    <div>
+      <App />
+    </div>
+  );
 };
 
 ReactDom.render(<Application />, document.querySelector("#root"));

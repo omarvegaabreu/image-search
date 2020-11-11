@@ -1,9 +1,8 @@
 import React from "react";
 import axios from "axios";
-import { Image } from "semantic-ui-react";
 import { API_KEY, API_URL } from "../util/apikeys";
 import SearchBar from "./SearchBar";
-import Images from "./Images";
+import ImageList from "./ImageList";
 
 class App extends React.Component {
   state = {
@@ -18,9 +17,7 @@ class App extends React.Component {
       },
     });
 
-    const responseData = [
-      ...response.data.results.map((res) => res.urls.small),
-    ];
+    const responseData = [...response.data.results.map((res) => res)];
 
     this.setState({ images: responseData });
   };
@@ -29,12 +26,7 @@ class App extends React.Component {
     return (
       <div className="ui container">
         <SearchBar onSubmit={this.onSearchSubmit} />
-        <Images />
-        {this.state.images.map((path) => (
-          <div className="ui stackable three column grid" key={path}>
-            <Image src={path} alt="alt" size="medium" bordered />
-          </div>
-        ))}
+        <ImageList>{this.state.images}</ImageList>
       </div>
     );
   }
