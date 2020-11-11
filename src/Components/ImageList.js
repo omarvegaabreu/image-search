@@ -15,8 +15,8 @@ const Images = (props) => {
       </div>
     );
   });
-
-  return <div className="image-grid">{renderToScreen}</div>;
+  //removed className=image-grid
+  return <div>{renderToScreen}</div>;
 };
 
 export default Images;

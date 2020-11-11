@@ -1,4 +1,5 @@
 import React from "react";
+import { Grid } from "semantic-ui-react";
 
 class ImageCard extends React.Component {
   constructor(props) {
@@ -29,9 +30,9 @@ class ImageCard extends React.Component {
     //src has different image sizes, in case for future  use
 
     return (
-      <div style={{ gridRowEnd: `span ${this.state.spans}` }}>
-        {<img ref={imgNode} alt={alt} src={src} />}
-      </div>
+      <Grid style={{ gridRowEnd: `span ${this.state.spans}` }}>
+        <img ref={imgNode} alt={alt} src={src} />
+      </Grid>
     );
   }
 }
